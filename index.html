@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Tracker</title>
     <!-- tailwind link -->
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-     <!-- icons link -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- icons link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
+    <!-- header section design -->
     <header>
-        <h1>Job APllication Tracker</h1>
-        <section>
-            
+        <section class="w-[80%] mx-auto  py-5 ">
+            <h1 class="text-3xl lg:text-6xl font-extrabold text-sky-900 ">Job Apllication Tracker</h1>
+
+            <div class="grid  lg:grid-cols-3 gap-3 mt-4">
+                <div class="shadow-md rounded-4xl p-6 text-center">
+                    <h4 class="text-xl lg:text-3xl font-bold">Total</h4>
+                    <h4 id="totalCount" class="text-xl lg:text-3xl font-bold py-2">0</h4>
+                </div>
+
+                <div class="shadow-md rounded-4xl p-6 text-center">
+                    <h4 class="text-xl lg:text-3xl font-bold">Interview</h4>
+                    <h4 id="thrivingCount" class="text-xl lg:text-3xl font-bold text-green-500 py-2">0</h4>
+                </div>
+
+                <div class="shadow-md rounded-4xl p-6 text-center">
+                    <h4 class="text-xl lg:text-3xl font-bold">Rejected</h4>
+                    <h4 id="strugglingCount" class="text-xl lg:text-3xl font-bold text-red-500 py-2">0</h4>
+                </div>
+            </div>
         </section>
-    </header>     
+    </header>
 
-
+    
 
 
 
     <!-- js link -->
-     <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
