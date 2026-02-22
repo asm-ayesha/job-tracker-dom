@@ -64,14 +64,19 @@ function toggleStyle(id) {
     if (id == 'interview-filter-btn') {
         cardContainer.classList.add('hidden');
         filterSection.classList.remove('hidden');
-        if(interviewArry.length == 0){
-            showEmptyMessage(filterSection)
-        }
-        else{
             renderInterview()
-        }
+
     }
-   
+    else if (id == 'all-filter-btn') {
+        cardContainer.classList.remove('hidden');
+        filterSection.classList.add('hidden');
+    }
+    else if (id == 'rejected-filter-btn') {
+        cardContainer.classList.add('hidden');
+        filterSection.classList.remove('hidden');
+            renderRejected()
+
+    }
 
 
 }
@@ -112,16 +117,51 @@ mainContainer.addEventListener('click', function (event) {
         rejectedArry = rejectedArry.filter(item => item.companyName != cardInfo.companyName)
 
         if(currentStatus == 'rejected-filter-btn'){
-            if(rejectedArry.length == 0){
-                showEmptyMessage(filterSection)
-            }
-            else{
+
                 renderRejected()
-            }
+
         }
         calCount()
     }
-   
+    else if (event.target.classList.contains('rejected-btn')) {
+        const parentDiv = event.target.parentNode.parentNode;
+
+        const companyName = parentDiv.querySelector('.company-name').innerText
+        const PositionName = parentDiv.querySelector('.position-name').innerText
+        const location = parentDiv.querySelector('.location').innerText
+        const type = parentDiv.querySelector('.type').innerText
+        const salary = parentDiv.querySelector('.salary').innerText
+        const status = parentDiv.querySelector('.not-applied').innerText
+        const note = parentDiv.querySelector('.notes').innerText
+
+        parentDiv.querySelector('.not-applied').innerText = 'Rejected'
+
+        const cardInfo = {
+            companyName,
+            PositionName,
+            location,
+            type,
+            salary,
+            status: 'Rejected',
+            note
+        }
+
+        const companyExist = rejectedArry.find(item => item.companyName == cardInfo.companyName)
+        parentDiv.querySelector('.not-applied').classList.add('bg-red-500', 'text-white')
+        if (!companyExist) {
+            rejectedArry.push(cardInfo)
+        }
+
+        interviewArry = interviewArry.filter(item=> item.companyName != cardInfo.companyName)
+
+        if(currentStatus == 'interview-filter-btn'){
+
+                renderInterview()
+
+        }
+        calCount()
+        
+    }
 })
 
 // interview fuucntion
@@ -167,8 +207,45 @@ function renderInterview() {
 
 
 
+// rejected funtion
+function renderRejected() {
+    filterSection.innerHTML = ''
+
+    for (let rejected of rejectedArry) {
+        let div = document.createElement('div')
+        div.className = 'card flex justify-between shadow-md bg-white p-8 rounded-xl'
+        div.innerHTML = `
+                <div class="left space-y-3">
+                    <p class="company-name text-sky-900 text-3xl font-bold">${rejected.companyName}</p>
+                    <p class="position-name text-gray-500 text-xl">${rejected.PositionName}</p>
+                    <ul class="work-time list-inside list-disc lg:flex gap-3 text-gray-500">
+                        <p class="location">${rejected.location}</p>
+                        <li class="type">${rejected.type}</li>
+                        <li class="salary">${rejected.salary}</li>
+                    </ul>
 
 
+                    <span class="not-applied bg-red-500 text-white font-bold px-5 py-2 rounded-xl">${rejected.status}</span>
+
+                    <p class="notes text-gray-500 mt-3">${rejected.note}</p>
+
+                    <div class="flex gap-5">
+                        <button
+                            class="interview-btn border-2 border-green-500 text-green-500 font-bold px-4 py-2 rounded-xl">INTERVIEW</button>
+                        <button
+                            class="rejected-btn border-2 border-red-500 font-bold text-red-500 px-4 py-2 rounded-xl">REJECTED</button>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <button class="btn-delete border-2 border-gray-300 text-gray-400 p-3  rounded-full"><i
+                            class="fa-solid fa-trash-can"></i></button>
+                </div>
+        `
+        filterSection.appendChild(div)
+
+    }
+}
 
 
 
