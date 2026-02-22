@@ -181,6 +181,31 @@ mainContainer.addEventListener('click', function (event) {
             }
         }
     }
+    else if(event.target.closest('.btn-delete')){
+        const card = event.target.closest('.card');
+        const companyName = card.querySelector(".company-name").innerText;
+
+        interviewArry = interviewArry.filter(item => item.companyName !== companyName);
+        rejectedArry = rejectedArry.filter(item => item.companyName !== companyName);
+
+        const allCards = cardContainer.querySelectorAll('.card')
+        allCards.forEach(allCards => {
+            const allCompany = allCards.querySelector('.company-name').innerText
+
+            if(allCompany === companyName){
+                allCards.remove();
+            }
+        });
+
+        card.remove();
+
+        if(currentStatus === 'interview-filter-btn'){
+            interviewArry.length === 0? showEmptyMessage(filterSection):renderInterview();
+        }
+        if(currentStatus === 'rejected-filter-btn'){
+            rejectedArry.length === 0? showEmptyMessage(filterSection):renderRejected();
+        }
+    }
     calCount()
 })
 
@@ -216,7 +241,7 @@ function renderInterview() {
                 </div>
 
                 <div class="right">
-                    <button class="btn-delete border-2 border-gray-300 text-gray-400 p-3  rounded-full"><i
+                    <button class="btn-delete border-2 border-gray-300 text-gray-400 p-3 rounded-full cursor-pointer hover:bg-red-400 hover:text-white"><i
                             class="fa-solid fa-trash-can"></i></button>
                 </div>
         `
@@ -258,7 +283,7 @@ function renderRejected() {
                 </div>
 
                 <div class="right">
-                    <button class="btn-delete border-2 border-gray-300 text-gray-400 p-3  rounded-full"><i
+                    <button class="btn-delete border-2 border-gray-300 text-gray-400 p-3 rounded-full cursor-pointer hover:bg-red-400 hover:text-white"><i
                             class="fa-solid fa-trash-can"></i></button>
                 </div>
         `
@@ -285,10 +310,6 @@ function showEmptyMessage(section) {
 
     section.appendChild(div);
 }
-
-
-
-
 
 
 
