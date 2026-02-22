@@ -20,21 +20,26 @@ const rejectedFilterBtn = document.getElementById("rejected-filter-btn")
 
 // get card container children
 const cardContainer = document.getElementById("card-container")
-
-
 const mainContainer = document.querySelector("main")
-
 const filterSection = document.getElementById("filtered-section")
 
 
 
-// function 
-
 function calCount() {
-    totalCount.innerText = cardContainer.children.length;
-    jobsCount.innerText = cardContainer.children.length;
+    const totalJobs = cardContainer.children.length;
+    totalCount.innerText = totalJobs;
     interviewCount.innerText = interviewArry.length;
     rejectedCount.innerText = rejectedArry.length;
+
+    if(currentStatus === 'interview-filter-btn'){
+        jobsCount.innerText = `${interviewArry.length} of ${totalJobs}`;
+    }
+    else if (currentStatus === 'rejected-filter-btn') {
+        jobsCount.innerText = `${rejectedArry.length} of ${totalJobs}`;
+    }
+    else {
+        jobsCount.innerText = `${totalJobs}`;
+    }
 
 }
 
@@ -66,6 +71,7 @@ function toggleStyle(id) {
         filterSection.classList.remove('hidden');
         if(interviewArry.length == 0){
             showEmptyMessage(filterSection)
+            calCount()
         }
         else{
             renderInterview()
@@ -74,12 +80,14 @@ function toggleStyle(id) {
     else if (id == 'all-filter-btn') {
         cardContainer.classList.remove('hidden');
         filterSection.classList.add('hidden');
+        calCount()
     }
     else if (id == 'rejected-filter-btn') {
         cardContainer.classList.add('hidden');
         filterSection.classList.remove('hidden');
         if(rejectedArry.length == 0){
             showEmptyMessage(filterSection)
+            calCount()
         }
         else{
             renderRejected()
@@ -124,7 +132,7 @@ mainContainer.addEventListener('click', function (event) {
 
         rejectedArry = rejectedArry.filter(item => item.companyName != cardInfo.companyName)
 
-        if(currentStatus == 'rejected-filter-btn'){
+        if(currentStatus === 'rejected-filter-btn'){
             if(rejectedArry.length == 0){
                 showEmptyMessage(filterSection)
             }
@@ -132,7 +140,6 @@ mainContainer.addEventListener('click', function (event) {
                 renderRejected()
             }
         }
-        calCount()
     }
     else if (event.target.classList.contains('rejected-btn')) {
         const parentDiv = event.target.parentNode.parentNode;
@@ -165,7 +172,7 @@ mainContainer.addEventListener('click', function (event) {
 
         interviewArry = interviewArry.filter(item=> item.companyName != cardInfo.companyName)
 
-        if(currentStatus == 'interview-filter-btn'){
+        if(currentStatus === 'interview-filter-btn'){
             if(interviewArry.length == 0){
                 showEmptyMessage(filterSection)
             }
@@ -173,9 +180,8 @@ mainContainer.addEventListener('click', function (event) {
                 renderInterview()
             }
         }
-        calCount()
-        
     }
+    calCount()
 })
 
 // interview fuucntion
