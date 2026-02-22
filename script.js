@@ -209,9 +209,9 @@ function renderInterview() {
 
                     <div class="flex gap-5">
                         <button
-                            class="interview-btn border-2 border-green-500 text-green-500 font-bold px-4 py-2 rounded-xl">INTERVIEW</button>
+                            class="interview-btn border-2 border-green-500 text-green-500 font-bold px-4 py-2 rounded-xl cursor-pointer hover:bg-green-500 hover:text-white">INTERVIEW</button>
                         <button
-                            class="rejected-btn border-2 border-red-500 font-bold text-red-500 px-4 py-2 rounded-xl">REJECTED</button>
+                            class="rejected-btn border-2 border-red-500 font-bold text-red-500 px-4 py-2 rounded-xl cursor-pointer hover:bg-red-500 hover:text-white">REJECTED</button>
                     </div>
                 </div>
 
@@ -251,9 +251,9 @@ function renderRejected() {
 
                     <div class="flex gap-5">
                         <button
-                            class="interview-btn border-2 border-green-500 text-green-500 font-bold px-4 py-2 rounded-xl">INTERVIEW</button>
+                            class="interview-btn border-2 border-green-500 text-green-500 font-bold px-4 py-2 rounded-xl cursor-pointer hover:bg-green-500 hover:text-white">INTERVIEW</button>
                         <button
-                            class="rejected-btn border-2 border-red-500 font-bold text-red-500 px-4 py-2 rounded-xl">REJECTED</button>
+                            class="rejected-btn border-2 border-red-500 font-bold text-red-500 px-4 py-2 rounded-xl cursor-pointer hover:bg-red-500 hover:text-white">REJECTED</button>
                     </div>
                 </div>
 
