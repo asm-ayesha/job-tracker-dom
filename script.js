@@ -64,8 +64,12 @@ function toggleStyle(id) {
     if (id == 'interview-filter-btn') {
         cardContainer.classList.add('hidden');
         filterSection.classList.remove('hidden');
+        if(interviewArry.length == 0){
+            showEmptyMessage(filterSection)
+        }
+        else{
             renderInterview()
-
+        }
     }
     else if (id == 'all-filter-btn') {
         cardContainer.classList.remove('hidden');
@@ -74,8 +78,12 @@ function toggleStyle(id) {
     else if (id == 'rejected-filter-btn') {
         cardContainer.classList.add('hidden');
         filterSection.classList.remove('hidden');
+        if(rejectedArry.length == 0){
+            showEmptyMessage(filterSection)
+        }
+        else{
             renderRejected()
-
+        }
     }
 
 
@@ -117,9 +125,12 @@ mainContainer.addEventListener('click', function (event) {
         rejectedArry = rejectedArry.filter(item => item.companyName != cardInfo.companyName)
 
         if(currentStatus == 'rejected-filter-btn'){
-
+            if(rejectedArry.length == 0){
+                showEmptyMessage(filterSection)
+            }
+            else{
                 renderRejected()
-
+            }
         }
         calCount()
     }
@@ -155,9 +166,12 @@ mainContainer.addEventListener('click', function (event) {
         interviewArry = interviewArry.filter(item=> item.companyName != cardInfo.companyName)
 
         if(currentStatus == 'interview-filter-btn'){
-
+            if(interviewArry.length == 0){
+                showEmptyMessage(filterSection)
+            }
+            else{
                 renderInterview()
-
+            }
         }
         calCount()
         
@@ -248,6 +262,23 @@ function renderRejected() {
 }
 
 
+// Empty filter
+function showEmptyMessage(section) {
+
+    section.innerHTML = '';
+
+    const div = document.createElement('div');
+
+    div.className = 'bg-white text-center p-[100px] rounded-xl';
+
+    div.innerHTML = `
+        <p><i class="fa-regular fa-file-lines text-6xl text-blue-400"></i></p>
+        <p class="text-2xl font-bold text-sky-900 pt-7">No jobs available</p>
+        <p class="text-gray-500">Check back soon for new job opportunities</p>
+    `;
+
+    section.appendChild(div);
+}
 
 
 
